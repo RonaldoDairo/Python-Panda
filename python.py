@@ -29,29 +29,52 @@
 
 # df_data_history['score'] = df_data_history['score'].str.split('-', expand=True)
 
-import pandas as pd
+# import pandas as pd
+# import numpy as np
+
+# # Definir la función para generar la secuencia de Fibonacci
+# def fibonacci(n):
+#     fib_seq = [0, 1]  # Inicializar la secuencia con los dos primeros números
+#     for i in range(2, n):
+#         next_num = fib_seq[i-1] + fib_seq[i-2]  # Calcular el siguiente número de Fibonacci
+#         fib_seq.append(next_num)  # Agregar el siguiente número a la secuencia
+#     return fib_seq
+
+# # Calcular la secuencia de Fibonacci utilizando Pandas y NumPy
+# n = 10  # Número de términos de la secuencia a calcular
+# fib_seq = fibonacci(n)  # Obtener la secuencia de Fibonacci
+
+# # Crear un DataFrame de Pandas con la secuencia de Fibonacci
+# df_fibonacci = pd.DataFrame({'Fibonacci': fib_seq})
+
+# # Calcular la proporción áurea utilizando NumPy
+# phi = np.array(df_fibonacci['Fibonacci'][1:]) / np.array(df_fibonacci['Fibonacci'][:-1])
+
+# # Agregar la proporción áurea al DataFrame
+# df_fibonacci['Golden Ratio'] = np.concatenate(([np.nan], phi))
+
+# # Imprimir el DataFrame con la secuencia de Fibonacci y la proporción áurea
+# print(df_fibonacci)
+
 import numpy as np
 
-# Definir la función para generar la secuencia de Fibonacci
-def fibonacci(n):
-    fib_seq = [0, 1]  # Inicializar la secuencia con los dos primeros números
-    for i in range(2, n):
-        next_num = fib_seq[i-1] + fib_seq[i-2]  # Calcular el siguiente número de Fibonacci
-        fib_seq.append(next_num)  # Agregar el siguiente número a la secuencia
-    return fib_seq
+import timeit
+# print(np.arange(10))
+np_array = np.arange(1000000)
 
-# Calcular la secuencia de Fibonacci utilizando Pandas y NumPy
-n = 10  # Número de términos de la secuencia a calcular
-fib_seq = fibonacci(n)  # Obtener la secuencia de Fibonacci
+py_list = list(range(1000000))
 
-# Crear un DataFrame de Pandas con la secuencia de Fibonacci
-df_fibonacci = pd.DataFrame({'Fibonacci': fib_seq})
+def add_two():
+    global np_array
+    np_array += 2
 
-# Calcular la proporción áurea utilizando NumPy
-phi = np.array(df_fibonacci['Fibonacci'][1:]) / np.array(df_fibonacci['Fibonacci'][:-1])
+execution_time = timeit.timeit(add_two, number=100)
+print(f"Tiempo de ejecución1: {execution_time} segundos")
 
-# Agregar la proporción áurea al DataFrame
-df_fibonacci['Golden Ratio'] = np.concatenate(([np.nan], phi))
 
-# Imprimir el DataFrame con la secuencia de Fibonacci y la proporción áurea
-print(df_fibonacci)
+def add_two():
+    global py_list
+    py_list = [x + 2 for x in py_list]
+
+execution_time = timeit.timeit(add_two, number=100)
+print(f"Tiempo de ejecución2: {execution_time} segundos")
