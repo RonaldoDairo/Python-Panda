@@ -8,6 +8,7 @@ df_fixture['home'] = df_fixture['home'].str.strip()# limpiando los espacios en b
 df_fixture['away'] = df_fixture['away'].str.strip()# limpiando los espacios en blanco
 
 missing_data.dropna(inplace=True)#Es utilizado para eliminar filas o columnas que contengan valores faltantes (NaN) en un DataFrame en pandas.
+print(missing_data)
 
 df_data_history = pd.concat([df_data_history, missing_data], ignore_index=True)
  # se utiliza para combinar dos DataFrames en pandas en un solo DataFrame utilizando la función concat
